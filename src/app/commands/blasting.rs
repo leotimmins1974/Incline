@@ -31,6 +31,12 @@ impl crate::app::App<'_> {
             return;
         }
         if active {
+            // The step's whole premise is a plan view over one bench, and a
+            // section drives the camera from its own state, so the plan-view
+            // lock below would have nothing to hold. Drop the section first
+            // and let the step have the camera. Leaving the step puts the
+            // plan camera back, not the section.
+            self.leave_slice_mode();
             let Some(graphics) = self.graphics.as_mut() else {
                 return;
             };

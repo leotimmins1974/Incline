@@ -787,6 +787,7 @@ pub(crate) fn draw_solid_render(ui: &mut egui::Ui, rect: egui::Rect, editor: &mu
                 image_rect,
                 forward.as_vec3().to_array(),
                 up.as_vec3().to_array(),
+                false,
             );
             if let Some(view) = gizmo.clicked {
                 editor.solid_preview_view.face(view);
